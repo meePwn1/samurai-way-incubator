@@ -1,0 +1,60 @@
+@import "null";
+$whiteColor: #fff;
+$grayColor: #8190a5;
+$greenColor: #13ce66;
+
+.wrapper {
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.header {
+  background-color: $greenColor;
+}
+.main {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  // .main__sidebar
+
+  &__sidebar {
+    background-color: $greenColor;
+    align-self: start;
+    padding: 20px;
+  }
+
+  // .main__content
+
+  &__content {
+  }
+}
+
+.sidebar {
+  min-height: 900px;
+  // .sidebar__list
+
+  &__list {
+  }
+
+  // .sidebar__item
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  // .sidebar__link
+
+  &__link {
+    color: $whiteColor;
+    font-size: 34px;
+    font-weight: 500;
+  }
+}
+.content {
+  background-color: $greenColor;
+}
