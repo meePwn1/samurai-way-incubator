@@ -1,7 +1,9 @@
-@import "null";
+@import url("https://fonts.googleapis.com/css?family=Roboto:regular,500,700&display=swap");
+
 $whiteColor: #fff;
-$grayColor: #8190a5;
-$greenColor: #13ce66;
+$grayColor: #687684;
+$blueColor: #4c9eeb;
+$greenColor: #03b48a;
 
 .wrapper {
   min-height: 100%;
@@ -10,51 +12,12 @@ $greenColor: #13ce66;
   flex-direction: column;
   gap: 20px;
 }
-.header {
-  background-color: $greenColor;
-}
+
 .main {
   flex: 1 1 auto;
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: 40px;
-  // .main__sidebar
-
-  &__sidebar {
-    background-color: $greenColor;
-    align-self: start;
-    padding: 20px;
-  }
-
-  // .main__content
-
-  &__content {
-  }
 }
 
-.sidebar {
-  min-height: 900px;
-  // .sidebar__list
-
-  &__list {
-  }
-
-  // .sidebar__item
-
-  &__item {
-    &:not(:last-child) {
-      margin-bottom: 15px;
-    }
-  }
-
-  // .sidebar__link
-
-  &__link {
-    color: $whiteColor;
-    font-size: 34px;
-    font-weight: 500;
-  }
-}
-.content {
-  background-color: $greenColor;
-}
+@import "null";

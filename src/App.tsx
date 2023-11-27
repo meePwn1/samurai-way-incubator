@@ -1,8 +1,8 @@
-import './assets/style/App.scss'
-import Header from './component/Header'
-import Main from './component/Main'
+import './assets/scss/App.scss'
+import Header from './components/Header/Header'
+import Main from './components/Main'
 
-function App() {
+const App = () => {
 	return (
 		<div className='wrapper'>
 			<Header />

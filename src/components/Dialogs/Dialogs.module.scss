@@ -1,0 +1,39 @@
+.root {
+	height: 100%;
+}
+.title {
+	font-weight: 700;
+	font-size: 30px;
+	margin-bottom: 30px;
+}
+.row {
+	display: grid;
+	grid-template-columns: 2fr 10fr;
+	height: 100%;
+}
+.dialogs {
+	flex: 0 1 250px;
+	border-right: 1px solid #4608ad;
+	height: 100%;
+	padding-left: 15px;
+}
+
+.dialog {
+	&.active {
+		font-weight: 700;
+	}
+	cursor: pointer;
+	font-size: 18px;
+	&:not(:last-child) {
+		margin-bottom: 30px;
+	}
+}
+.messages {
+	padding-left: 30px;
+}
+.message {
+	font-size: 18px;
+	&:not(:last-child) {
+		margin-bottom: 30px;
+	}
+}
