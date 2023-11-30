@@ -1,19 +1,22 @@
 import { FC } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import './assets/scss/App.scss'
 import Header from './components/Header/Header'
 import Main from './components/Main'
-import { IState } from './redux/state'
+import { IState } from './redux/store'
 
 type AppPropsType = {
 	state: IState
-	createPost: (message: string) => void
+	dispatch: any
 }
 
-const App: FC<AppPropsType> = ({ state, createPost }) => {
+const App: FC<AppPropsType> = ({ state, dispatch }) => {
 	return (
 		<div className='wrapper'>
-			<Header />
-			<Main state={state} createPost={createPost} />
+			<BrowserRouter>
+				<Header />
+				<Main state={state} dispatch={dispatch} />
+			</BrowserRouter>
 		</div>
 	)
 }

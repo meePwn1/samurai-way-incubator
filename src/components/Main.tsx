@@ -1,24 +1,20 @@
 import { FC } from 'react'
 import { Route } from 'react-router-dom'
-import { IState } from '../redux/state'
+import { IState } from '../redux/store'
 import Dialogs from './Dialogs/Dialogs'
 import Profile from './Profile/Profile'
 import Sidebar from './Sidebar/Sidebar'
 
 type MainPropsType = {
 	state: IState
-	createPost: (message: string) => void
+	dispatch: any
 }
 
-const Main: FC<MainPropsType> = ({ state, createPost }) => {
+const Main: FC<MainPropsType> = ({ state, dispatch }) => {
 	return (
 		<main className='main'>
 			<Sidebar />
-			<Route
-				exact
-				path='/profile'
-				render={() => <Profile posts={state.profilePage.postData} createPost={createPost} />}
-			/>
+			<Route exact path='/profile' render={() => <Profile profilePage={state.profilePage} dispatch={dispatch} />} />
 			<Route
 				exact
 				path='/dialogs'

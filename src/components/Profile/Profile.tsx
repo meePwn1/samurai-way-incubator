@@ -1,15 +1,15 @@
 import { FC } from 'react'
-import { IPost } from '../../redux/state'
+import { ProfileType } from '../../redux/store'
 import MyPosts from './MyPosts/MyPosts'
 import style from './Profile.module.scss'
 import UserInfo from './UserInfo/UserInfo'
 
 type ProfilePropsType = {
-	posts: IPost[]
-	createPost: (message: string) => void
+	profilePage: ProfileType
+	dispatch: any
 }
 
-const Profile: FC<ProfilePropsType> = ({ posts, createPost }) => {
+const Profile: FC<ProfilePropsType> = ({ profilePage, dispatch }) => {
 	return (
 		<div className={style.profile}>
 			<div className={style.profile__main}>
@@ -19,7 +19,7 @@ const Profile: FC<ProfilePropsType> = ({ posts, createPost }) => {
 				/>
 			</div>
 			<UserInfo />
-			<MyPosts posts={posts} createPost={createPost} />
+			<MyPosts posts={profilePage} dispatch={dispatch} />
 		</div>
 	)
 }

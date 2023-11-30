@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { IDialogs, IMessages } from '../../redux/state'
+import { IDialogs, IMessages } from '../../redux/store'
 import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.scss'
 import Message from './Message/Message'

@@ -1,23 +1,31 @@
-import { FC, MouseEvent, createRef } from 'react'
-import { IPost } from '../../../redux/state'
+import { ChangeEvent, FC, KeyboardEvent, createRef } from 'react'
+import { ProfileType } from '../../../redux/store'
 import style from './MyPosts.module.scss'
 import Post from './Post/Post'
 
 type MyPostsPropsType = {
-	posts: IPost[]
-	createPost: (message: string) => void
+	posts: ProfileType
+	dispatch: any
 }
 
-const MyPosts: FC<MyPostsPropsType> = ({ posts, createPost }) => {
+const MyPosts: FC<MyPostsPropsType> = ({ posts, dispatch }) => {
 	const textRef = createRef<HTMLTextAreaElement>()
 
-	const addPost = (e: MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault()
-		if (textRef.current) {
-			createPost(textRef.current?.value)
-			textRef.current.value = ''
+	const addPost = () => {
+		if (textRef.current?.value) {
+			const action = { type: 'ADD-POST' }
+			dispatch(action)
 		}
 		console.log(posts)
+	}
+	const handleOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		const action = { type: 'UPDATE-CHANGE-NEW-POST-TEXT', text: e.target.value.trimStart() }
+		dispatch(action)
+	}
+	const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+		if (e.key === 'Enter') {
+			addPost()
+		}
 	}
 
 	return (
@@ -25,14 +33,20 @@ const MyPosts: FC<MyPostsPropsType> = ({ posts, createPost }) => {
 			<div className={style.myPosts__title}>My Posts</div>
 			<div className={style.myPosts__newPost}>
 				<form>
-					<textarea ref={textRef} className={style.myPosts__text} />
-					<button onClick={addPost} className={style.myPosts__btn}>
+					<textarea
+						ref={textRef}
+						value={posts.newPostText}
+						className={style.myPosts__text}
+						onChange={handleOnChange}
+						onKeyDown={handleKeyPress}
+					/>
+					<button type='button' onClick={addPost} className={style.myPosts__btn}>
 						Send
 					</button>
 				</form>
 			</div>
 			<ul>
-				{posts.map(data => {
+				{posts.postData.map(data => {
 					return <Post key={data.id} message={data.message} />
 				})}
 			</ul>
