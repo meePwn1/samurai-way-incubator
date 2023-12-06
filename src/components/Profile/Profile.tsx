@@ -1,12 +1,13 @@
-import { FC } from 'react'
-import { ProfileType } from '../../redux/store'
+import { Dispatch, FC } from 'react'
+import { CombinedActions } from '../../types'
+import { ProfileState } from '../../types/profilePage'
 import MyPosts from './MyPosts/MyPosts'
 import style from './Profile.module.scss'
 import UserInfo from './UserInfo/UserInfo'
 
 type ProfilePropsType = {
-	profilePage: ProfileType
-	dispatch: any
+	profilePage: ProfileState
+	dispatch: Dispatch<CombinedActions>
 }
 
 const Profile: FC<ProfilePropsType> = ({ profilePage, dispatch }) => {

@@ -1,13 +1,13 @@
 import ReactDOM from 'react-dom'
 import App from './App'
-import store from './redux/store'
+import { store } from './store'
+import { RootState } from './store/reducers'
 
-const renderEntireTree = () => {
-	ReactDOM.render(
-		<App state={store.getPosts()} dispatch={store.dispatch.bind(store)} />,
-		document.getElementById('root')
-	)
+const renderEntireTree = (state: RootState) => {
+	ReactDOM.render(<App state={state} dispatch={store.dispatch.bind(store)} />, document.getElementById('root'))
 }
-renderEntireTree()
+renderEntireTree(store.getState())
 
-store.subscribe(renderEntireTree)
+store.subscribe(() => {
+	renderEntireTree(store.getState())
+})

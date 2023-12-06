@@ -1,11 +1,13 @@
-import { ChangeEvent, FC, KeyboardEvent, createRef } from 'react'
-import { ProfileType } from '../../../redux/store'
+import { ChangeEvent, Dispatch, FC, KeyboardEvent, createRef } from 'react'
+import { createPost, updateNewPostText } from '../../../store/actions/profileAction'
+import { CombinedActions } from '../../../types'
+import { ProfileState } from '../../../types/profilePage'
 import style from './MyPosts.module.scss'
 import Post from './Post/Post'
 
 type MyPostsPropsType = {
-	posts: ProfileType
-	dispatch: any
+	posts: ProfileState
+	dispatch: Dispatch<CombinedActions>
 }
 
 const MyPosts: FC<MyPostsPropsType> = ({ posts, dispatch }) => {
@@ -13,14 +15,13 @@ const MyPosts: FC<MyPostsPropsType> = ({ posts, dispatch }) => {
 
 	const addPost = () => {
 		if (textRef.current?.value) {
-			const action = { type: 'ADD-POST' }
-			dispatch(action)
+			dispatch(createPost())
 		}
 		console.log(posts)
 	}
 	const handleOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		const action = { type: 'UPDATE-CHANGE-NEW-POST-TEXT', text: e.target.value.trimStart() }
-		dispatch(action)
+		const text = e.target.value
+		dispatch(updateNewPostText(text))
 	}
 	const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
 		if (e.key === 'Enter') {

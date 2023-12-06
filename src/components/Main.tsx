@@ -1,13 +1,14 @@
-import { FC } from 'react'
+import { Dispatch, FC } from 'react'
 import { Route } from 'react-router-dom'
-import { IState } from '../redux/store'
+import { RootState } from '../store/reducers'
+import { CombinedActions } from '../types'
 import Dialogs from './Dialogs/Dialogs'
 import Profile from './Profile/Profile'
 import Sidebar from './Sidebar/Sidebar'
 
 type MainPropsType = {
-	state: IState
-	dispatch: any
+	state: RootState
+	dispatch: Dispatch<CombinedActions>
 }
 
 const Main: FC<MainPropsType> = ({ state, dispatch }) => {
@@ -15,11 +16,7 @@ const Main: FC<MainPropsType> = ({ state, dispatch }) => {
 		<main className='main'>
 			<Sidebar />
 			<Route exact path='/profile' render={() => <Profile profilePage={state.profilePage} dispatch={dispatch} />} />
-			<Route
-				exact
-				path='/dialogs'
-				render={() => <Dialogs dialogs={state.dialogsPage.dialogsData} messages={state.dialogsPage.messagesData} />}
-			/>
+			<Route exact path='/dialogs' render={() => <Dialogs dialogsPage={state.dialogsPage} dispatch={dispatch} />} />
 		</main>
 	)
 }
