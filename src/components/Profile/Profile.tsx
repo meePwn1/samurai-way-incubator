@@ -1,16 +1,9 @@
-import { Dispatch, FC } from 'react'
-import { CombinedActions } from '../../types'
-import { ProfileState } from '../../types/profilePage'
-import MyPosts from './MyPosts/MyPosts'
+import { FC } from 'react'
+import MyPostsContainer from './MyPosts/MyPostsContainer'
 import style from './Profile.module.scss'
 import UserInfo from './UserInfo/UserInfo'
 
-type ProfilePropsType = {
-	profilePage: ProfileState
-	dispatch: Dispatch<CombinedActions>
-}
-
-const Profile: FC<ProfilePropsType> = ({ profilePage, dispatch }) => {
+const Profile: FC = () => {
 	return (
 		<div className={style.profile}>
 			<div className={style.profile__main}>
@@ -20,7 +13,7 @@ const Profile: FC<ProfilePropsType> = ({ profilePage, dispatch }) => {
 				/>
 			</div>
 			<UserInfo />
-			<MyPosts posts={profilePage} dispatch={dispatch} />
+			<MyPostsContainer />
 		</div>
 	)
 }

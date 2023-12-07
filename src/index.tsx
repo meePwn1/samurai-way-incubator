@@ -1,13 +1,19 @@
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { store } from './store'
-import { RootState } from './store/reducers'
 
-const renderEntireTree = (state: RootState) => {
-	ReactDOM.render(<App state={state} dispatch={store.dispatch.bind(store)} />, document.getElementById('root'))
+const renderEntireTree = () => {
+	ReactDOM.render(
+		<BrowserRouter>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</BrowserRouter>,
+		document.getElementById('root')
+	)
 }
-renderEntireTree(store.getState())
+renderEntireTree()
 
-store.subscribe(() => {
-	renderEntireTree(store.getState())
-})
+store.subscribe(renderEntireTree)

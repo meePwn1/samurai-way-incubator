@@ -20,12 +20,13 @@ const initialState: DialogsState = {
 export const dialogsReducer = (state = initialState, action: DialogsAction): DialogsState => {
 	switch (action.type) {
 		case DialogsActionType.UPDATE_NEW_MESSAGE_TEXT: {
+			const newState = { ...state }
 			if (action.payload) {
-				state.newMessageText = action.payload
+				newState.newMessageText = action.payload
 			} else {
-				state.newMessageText = ''
+				newState.newMessageText = ''
 			}
-			return state
+			return newState
 		}
 		case DialogsActionType.ADD_MESSAGE: {
 			const currentId = state.messagesData[state.messagesData.length - 1].id
@@ -33,9 +34,9 @@ export const dialogsReducer = (state = initialState, action: DialogsAction): Dia
 				id: currentId + 1,
 				message: state.newMessageText,
 			}
-			state.newMessageText = ''
-			state.messagesData.push(newPost)
-			return state
+			const newState = { ...state, messagesData: [...state.messagesData, newPost] }
+			newState.newMessageText = ''
+			return newState
 		}
 		default:
 			return state

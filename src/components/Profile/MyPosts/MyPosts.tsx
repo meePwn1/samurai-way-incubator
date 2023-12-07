@@ -1,27 +1,26 @@
-import { ChangeEvent, Dispatch, FC, KeyboardEvent, createRef } from 'react'
-import { createPost, updateNewPostText } from '../../../store/actions/profileAction'
-import { CombinedActions } from '../../../types'
-import { ProfileState } from '../../../types/profilePage'
+import { ChangeEvent, FC, KeyboardEvent, createRef } from 'react'
+import { IPost } from '../../../_selfRedux'
 import style from './MyPosts.module.scss'
 import Post from './Post/Post'
 
-type MyPostsPropsType = {
-	posts: ProfileState
-	dispatch: Dispatch<CombinedActions>
+type MyPostsProps = {
+	posts: IPost[]
+	newPostText: string
+	createPost: () => void
+	updateNewPostText: (text: string) => void
 }
 
-const MyPosts: FC<MyPostsPropsType> = ({ posts, dispatch }) => {
+const MyPosts: FC<MyPostsProps> = ({ posts, createPost, updateNewPostText, newPostText }) => {
 	const textRef = createRef<HTMLTextAreaElement>()
-
 	const addPost = () => {
-		if (textRef.current?.value) {
-			dispatch(createPost())
+		if (textRef.current?.value.trim()) {
+			createPost()
 		}
-		console.log(posts)
 	}
 	const handleOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		const text = e.target.value
-		dispatch(updateNewPostText(text))
+		debugger
+		const text = e.target.value.trimStart()
+		updateNewPostText(text)
 	}
 	const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
 		if (e.key === 'Enter') {
@@ -36,7 +35,7 @@ const MyPosts: FC<MyPostsPropsType> = ({ posts, dispatch }) => {
 				<form>
 					<textarea
 						ref={textRef}
-						value={posts.newPostText}
+						value={newPostText}
 						className={style.myPosts__text}
 						onChange={handleOnChange}
 						onKeyDown={handleKeyPress}
@@ -47,7 +46,7 @@ const MyPosts: FC<MyPostsPropsType> = ({ posts, dispatch }) => {
 				</form>
 			</div>
 			<ul>
-				{posts.postData.map(data => {
+				{posts.map(data => {
 					return <Post key={data.id} message={data.message} />
 				})}
 			</ul>

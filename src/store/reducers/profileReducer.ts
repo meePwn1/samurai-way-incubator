@@ -16,17 +16,18 @@ export const profileReducer = (state = initialState, action: ProfileAction): Pro
 				id: currentId + 1,
 				message: state.newPostText,
 			}
-			state.newPostText = ''
-			state.postData.push(newPost)
-			return state
+			const newState = { ...state, postData: [...state.postData, newPost] }
+			newState.newPostText = ''
+			return newState
 		}
 		case ProfileActionTypes.UPDATE_NEW_POST_TEXT: {
+			const newState = { ...state }
 			if (action.payload) {
-				state.newPostText = action.payload
+				newState.newPostText = action.payload
 			} else {
-				state.newPostText = ''
+				newState.newPostText = ''
 			}
-			return state
+			return newState
 		}
 		default:
 			return state

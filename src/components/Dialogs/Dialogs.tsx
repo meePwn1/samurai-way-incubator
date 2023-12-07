@@ -1,6 +1,4 @@
-import { ChangeEvent, Dispatch, FC, useRef } from 'react'
-import { createMessage, updateNewMessageText } from '../../store/actions/dialogsAciton'
-import { CombinedActions } from '../../types'
+import { ChangeEvent, FC, useRef } from 'react'
 import { DialogsState } from '../../types/dialogsPage'
 import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.scss'
@@ -8,21 +6,21 @@ import Message from './Message/Message'
 
 type DialogsPropsType = {
 	dialogsPage: DialogsState
-	dispatch: Dispatch<CombinedActions>
+	createMessage: () => void
+	updateMessage: (text: string) => void
 }
 
-const Dialogs: FC<DialogsPropsType> = ({ dialogsPage, dispatch }) => {
+const Dialogs: FC<DialogsPropsType> = ({ dialogsPage, createMessage, updateMessage }) => {
 	const textRef = useRef<HTMLTextAreaElement | null>(null)
 	const handleClick = () => {
 		if (textRef.current?.value.trim()) {
-			dispatch(createMessage())
+			createMessage()
 		}
 	}
 
 	const handleOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const text = e.target.value.trimStart()
-		dispatch(updateNewMessageText(text))
-		console.log(dialogsPage.newMessageText)
+		updateMessage(text)
 	}
 
 	return (

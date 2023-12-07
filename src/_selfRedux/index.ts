@@ -9,7 +9,7 @@ interface IMessages {
 	message: string
 }
 
-interface IPost {
+export interface IPost {
 	id: number
 	message: string
 }
