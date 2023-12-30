@@ -1,10 +1,10 @@
 import { ChangeEvent, FC, KeyboardEvent, createRef } from 'react'
-import { IPost } from '../../../_selfRedux'
+import { PostData } from '../../../types/profilePage'
 import style from './MyPosts.module.scss'
 import Post from './Post/Post'
 
 type MyPostsProps = {
-	posts: IPost[]
+	posts: PostData[]
 	newPostText: string
 	createPost: () => void
 	updateNewPostText: (text: string) => void
