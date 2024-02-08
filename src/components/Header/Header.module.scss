@@ -1,6 +1,13 @@
 .header {
 	min-height: 80px;
 	background-color: #03b48a;
+
+	&__container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 30px;
+	}
 	// .header__logo
 	&__logo {
 		display: inline-block;

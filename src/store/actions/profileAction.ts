@@ -1,16 +1,7 @@
-import {
-	ProfileActionTypes,
-	ProfileAddPostAction,
-	ProfileNewPostTextAction,
-} from '../../types/profilePage'
+import { IProfile, ProfileActionTypes } from '../../types/IProfile.interface'
 
-export const createPostAction = (): ProfileAddPostAction => ({
-	type: ProfileActionTypes.ADD_POST,
-})
-
-export const updateNewPostTextAction = (
-	newText: string
-): ProfileNewPostTextAction => ({
-	type: ProfileActionTypes.UPDATE_NEW_POST_TEXT,
-	payload: newText,
-})
+export const setUserProfile = (data: IProfile) =>
+	({
+		type: ProfileActionTypes.SET_PROFILE,
+		data,
+	} as const)

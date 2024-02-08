@@ -1,9 +1,13 @@
 import { FC } from 'react'
-import MyPostsContainer from './MyPosts/MyPostsContainer'
+import { IProfile } from '../../types/IProfile.interface'
 import style from './Profile.module.scss'
 import UserInfo from './UserInfo/UserInfo'
 
-const Profile: FC = () => {
+interface ProfileProps {
+	profilePage: IProfile
+}
+
+const Profile: FC<ProfileProps> = ({ profilePage }) => {
 	return (
 		<div className={style.profile}>
 			<div className={style.profile__main}>
@@ -12,8 +16,8 @@ const Profile: FC = () => {
 					alt=''
 				/>
 			</div>
-			<UserInfo />
-			<MyPostsContainer />
+			<UserInfo profileData={profilePage} />
+			{/* <MyPostsContainer /> */}
 		</div>
 	)
 }

@@ -1,70 +1,57 @@
-import axios, { AxiosResponse } from 'axios'
-import React from 'react'
-import avatar from '../../assets/img/avatar.jpg'
-import { IUser } from '../../types/usersPage'
+import { ChangeEvent, FC } from 'react'
+import Pagination from '../../UI/pagination/Pagination'
+import { IEntityUser } from '../../types/IUser.interface'
 import styles from './Users.module.scss'
-
-interface UserData {
-	error: null | string
-	items: IUser[]
-	totalCount: number
-}
+import UsersItem from './UsersItem'
+import UsersItemSkeleton from './UsersItemSkeleton'
 
 interface UsersProps {
-	users: IUser[]
+	usersPage: IEntityUser
+	isLoading: boolean
+	changePageHandler: (e: ChangeEvent<unknown>, page: number) => void
 	follow: (id: number) => void
 	unfollow: (id: number) => void
-	setUser: (users: IUser[]) => void
 }
 
-class Users extends React.Component<UsersProps> {
-	constructor(props: UsersProps) {
-		super(props)
-		this.state = { page: 1 }
-	}
-
-	componentDidMount(): void {
-		axios
-			.get<UserData>('https://social-network.samuraijs.com/api/1.0/users')
-			.then((respone: AxiosResponse<UserData>) => this.props.setUser(respone.data.items))
-	}
-
-	render() {
-		const { users, follow, unfollow } = this.props
-
-		return (
-			<div className={styles.root}>
-				<h1 className={styles.title}>Users</h1>
-				<div><span></span></div>
-				<div className={styles.users}>
-					{users.map(el => {
-						return (
-							<div className={styles.item}>
-								<div className={styles.avatar}>
-									<div className={styles.image}>
-										<img src={el.photos.small ? el.photos.small : avatar} alt={el.name} />
-									</div>
-									{el.followed ?
-										<button onClick={() => unfollow(el.id)}>Unfollowed</button> :
-										<button onClick={() => follow(el.id)}>Followed</button>}
-								</div>
-								<div className={styles.content}>
-									<div className={styles.userinfo}>
-										<div className={styles.userinfoItem}>{el.name}</div>
-									</div>
-									<div className={styles.statusComment}>
-										{el.status}
-									</div>
-								</div>
-							</div>
-						)
-					})}
-
-				</div>
-				<div className={styles.showmore}>
-					<button>Show more</button>
-				</div>
-			</div>)
-	}
+const Users: FC<UsersProps> = ({
+	usersPage,
+	isLoading,
+	follow,
+	unfollow,
+	changePageHandler,
+}) => {
+	const { users, totalPages, currentPage, followInProgress } = usersPage
+	return (
+		<div className={styles.root}>
+			<h1 className={styles.title}>Users</h1>
+			<div className={styles.users}>
+				{isLoading && !users.length && <UsersItemSkeleton count={5} />}
+				{users.map(user => {
+					return (
+						<UsersItem
+							key={user.id}
+							user={user}
+							follow={follow}
+							unfollow={unfollow}
+							followInProgress={followInProgress}
+						/>
+					)
+				})}
+			</div>
+			<div className={styles.showmore}></div>
+			<Pagination
+				count={totalPages}
+				page={currentPage}
+				onChange={changePageHandler}
+				size='large'
+				sx={{
+					'& .MuiPagination-ul': {
+						justifyContent: 'center',
+					},
+				}}
+			/>
+		</div>
+	)
 }
+
 export default Users

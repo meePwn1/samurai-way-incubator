@@ -1,8 +1,10 @@
 import { Dispatch } from 'react'
 import { connect } from 'react-redux'
-import { createMessageAction, updateNewMessageTextAction } from '../../store/actions/dialogsAciton'
-import { RootState } from '../../store/reducers'
-import { CombinedActions } from '../../types'
+import {
+	createMessageAction,
+	updateNewMessageTextAction,
+} from '../../store/actions/dialogsAciton'
+import { CombinedActions, RootState } from '../../store/store'
 import Dialogs from './Dialogs'
 
 const mapStateToProps = (state: RootState) => {

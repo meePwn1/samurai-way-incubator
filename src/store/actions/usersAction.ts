@@ -1,28 +1,32 @@
-import {
-	FollowAction,
-	IUser,
-	SetUsersAction,
-	UnfollowAction,
-	UserActionTypes,
-} from '../../types/usersPage'
+import { IUser, UserActionTypes } from '../../types/IUser.interface'
 
-export const followAction = (id: number): FollowAction => {
-	return {
+export const followAction = (id: number) =>
+	({
 		type: UserActionTypes.FOLLOW,
-		payload: id,
-	}
-}
+		id,
+	} as const)
 
-export const unfollowAction = (id: number): UnfollowAction => {
-	return {
+export const unfollowAction = (id: number) =>
+	({
 		type: UserActionTypes.UNFOLLOW,
-		payload: id,
-	}
-}
+		id,
+	} as const)
 
-export const setUsersAction = (users: IUser[]): SetUsersAction => {
-	return {
+export const setUsersAction = (users: IUser[]) =>
+	({
 		type: UserActionTypes.SET_USERS,
-		payload: users,
-	}
-}
+		users,
+	} as const)
+
+export const setCurrentPageAction = (page: number) =>
+	({ type: UserActionTypes.SET_CURRENT_PAGE, page } as const)
+
+export const setTotalPagesAction = (value: number) =>
+	({ type: UserActionTypes.SET_TOTAL_PAGES, value } as const)
+
+export const setPageSizeAction = (value: number) =>
+	({ type: UserActionTypes.SET_PAGE_SIZE, value } as const)
+export const addFollowProgressAction = (userID: number) =>
+	({ type: UserActionTypes.ADD_FOLLOW_PROGRESS, userID } as const)
+export const deleteFollowProgressAction = (userID: number) =>
+	({ type: UserActionTypes.DELETE_FOLLOW_PROGRESS, userID } as const)

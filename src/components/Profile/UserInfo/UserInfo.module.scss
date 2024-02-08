@@ -31,11 +31,6 @@
 		margin-bottom: 20px;
 	}
 
-	// .userInfo__list
-
-	&__list {
-	}
-
 	// .userInfo__item
 
 	&__item {
@@ -49,11 +44,12 @@
 
 	// .userInfo__item-label
 
-	&__item-label {
+	&__itemLabel {
+		font-weight: 700;
 	}
 
 	// .userInfo__item-value
 
-	&__item-value {
+	&__itemValue {
 	}
 }

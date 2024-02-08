@@ -1,20 +1,46 @@
+import { FC } from 'react'
+import avatar from '../../../assets/img/avatar.jpg'
+import { IProfile } from '../../../types/IProfile.interface'
 import style from './UserInfo.module.scss'
-import UserInfoDesc from './UserInfoItem/UserInfoItem'
 
-const UserInfo = () => {
+interface UserInfoProps {
+	profileData: IProfile
+}
+
+const UserInfo: FC<UserInfoProps> = ({ profileData }) => {
+	const {
+		contacts,
+		fullName,
+		lookingForAJob,
+		lookingForAJobDescription,
+		photos,
+	} = profileData
 	return (
 		<div className={style.userInfo}>
 			<div className={style.userInfo__ava}>
-				<img src='https://i.pinimg.com/originals/dc/be/80/dcbe8061a60da1ee10dcba4f0adcef66.jpg' alt='' />
+				<img src={photos.small ? photos.small : avatar} alt='' />
 			</div>
 			<div>
-				<div className={style.userInfo__name}>Dmitry K.</div>
-				<ul>
-					<UserInfoDesc />
-					<UserInfoDesc />
-					<UserInfoDesc />
-					<UserInfoDesc />
-				</ul>
+				<div className={style.userInfo__name}>{fullName}</div>
+				<div className={style.userInfo__desc}>
+					<div className={style.userInfo__item}>
+						<span className={style.userInfo__itemLabel}>
+							Looking for a job:{' '}
+						</span>
+						<span className={style.userInfo__itemValue}>
+							{' '}
+							{lookingForAJob ? 'yes' : 'no'}
+						</span>
+					</div>
+					<div className={style.userInfo__item}>
+						<span className={style.userInfo__itemLabel}>
+							Work expectations:{' '}
+						</span>
+						<span className={style.userInfo__itemValue}>
+							{lookingForAJobDescription ? lookingForAJobDescription : '...'}
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	)
