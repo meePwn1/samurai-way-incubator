@@ -1,13 +1,12 @@
 import { Component } from 'react'
 import { ConnectedProps, connect } from 'react-redux'
-import { AuthService } from '../../services/AuthService'
 import * as AuthActions from '../../store/actions/authAction'
 import { RootState } from '../../store/store'
 import Header from './Header'
 
 class HeaderContainer extends Component<HeaderProps> {
 	componentDidMount() {
-		AuthService.me().then(res => this.props.setAuthDataAction(res.data.data))
+		this.props.authMeThunk()
 	}
 	render() {
 		return <Header {...this.props} />

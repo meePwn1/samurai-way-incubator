@@ -1,11 +1,10 @@
-import { FC } from 'react'
 import { Route } from 'react-router-dom'
 import DialogsContainer from './Dialogs/DialogsContainer'
 import ProfileContainer from './Profile/ProfileContainer'
 import Sidebar from './Sidebar/Sidebar'
 import UsersContainer from './Users/UsersContainer'
 
-const Main: FC = () => {
+const Main = () => {
 	return (
 		<main className='main'>
 			<Sidebar />

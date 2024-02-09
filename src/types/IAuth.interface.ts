@@ -14,4 +14,4 @@ export interface IEntityAuth {
 	isAuth: boolean
 }
 
-export type AuthActions = ReturnType<typeof setAuthDataAction>
+export type AuthAction = ReturnType<typeof setAuthDataAction>

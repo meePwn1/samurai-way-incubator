@@ -12,16 +12,15 @@ export class UsersService {
 		})
 	}
 }
+export interface IUserQueryParams {
+	count: number
+	page: number
+	term: string
+	friend: boolean
+}
 
 interface IUserResponse {
 	error: null | string
 	items: IUser[]
 	totalCount: number
-}
-
-interface IUserQueryParams {
-	count: number
-	page: number
-	term: string
-	friend: boolean
 }

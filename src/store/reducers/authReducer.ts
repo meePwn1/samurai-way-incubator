@@ -1,9 +1,9 @@
 import {
+	AuthAction,
 	AuthActionTypes,
-	AuthActions,
 	IAuth,
 	IEntityAuth,
-} from '../../types/IAuth'
+} from '../../types/IAuth.interface'
 
 const initialState: IEntityAuth = {
 	data: {} as IAuth,
@@ -12,7 +12,7 @@ const initialState: IEntityAuth = {
 
 export const authReducer = (
 	state = initialState,
-	action: AuthActions
+	action: AuthAction
 ): IEntityAuth => {
 	switch (action.type) {
 		case AuthActionTypes.SET_AUTH_DATA:

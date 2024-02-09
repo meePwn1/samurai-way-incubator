@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css'
 import App from './App'
 import { store } from './store/store'
 

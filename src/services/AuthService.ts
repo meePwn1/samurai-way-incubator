@@ -1,5 +1,5 @@
 import { apiAxios } from '../api/api'
-import { IAuth } from '../types/IAuth'
+import { IAuth } from '../types/IAuth.interface'
 
 const AUTH = 'auth'
 
