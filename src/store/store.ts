@@ -28,3 +28,6 @@ export type CombinedActions =
 	| UserAction
 	| AppAction
 	| AuthAction
+
+//@ts-ignore
+window.store = store

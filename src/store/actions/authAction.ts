@@ -14,7 +14,9 @@ export const authMeThunk =
 	() => async (dispatch: Dispatch<CombinedActions>) => {
 		try {
 			const res = await AuthService.me()
-			dispatch(setAuthDataAction(res.data.data))
+			if (!res.data.resultCode) {
+				dispatch(setAuthDataAction(res.data.data))
+			}
 		} catch (error) {
 			errorHandler(error, dispatch)
 		}

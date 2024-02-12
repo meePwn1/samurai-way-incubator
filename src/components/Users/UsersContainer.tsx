@@ -1,5 +1,7 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, ComponentType } from 'react'
 import { ConnectedProps, connect } from 'react-redux'
+import { compose } from 'redux'
+import { withAuthRedirect } from '../../HOC/withAuthRedirect'
 import LinearLoader from '../../UI/Loader/LinearLoader'
 import * as UsersActions from '../../store/actions/usersAction'
 import { RootState } from '../../store/store'
@@ -55,4 +57,7 @@ const mapStateToProps = (state: RootState) => ({
 const connected = connect(mapStateToProps, { ...UsersActions })
 export type UsersReduxProps = ConnectedProps<typeof connected>
 
-export default connected(UsersContainer)
+export default compose<ComponentType>(
+	connected,
+	withAuthRedirect
+)(UsersContainer)

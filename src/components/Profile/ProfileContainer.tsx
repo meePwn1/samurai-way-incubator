@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { ComponentType } from 'react'
 import { ConnectedProps, connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { compose } from 'redux'
+import { withAuthRedirect } from '../../HOC/withAuthRedirect'
 import LinearLoader from '../../UI/Loader/LinearLoader'
 import { ProfileService } from '../../services/ProfileService'
 import * as ProfileActions from '../../store/actions/profileAction'
@@ -51,5 +53,9 @@ type ParamsType = {
 }
 type ProfileReduxProps = ConnectedProps<typeof connected>
 type ProfileProps = RouteComponentProps<ParamsType> & ProfileReduxProps
-const ProfileContainerWithParams = withRouter(ProfileContainer)
-export default connected(ProfileContainerWithParams)
+
+export default compose<ComponentType>(
+	connected,
+	withRouter,
+	withAuthRedirect
+)(ProfileContainer)
