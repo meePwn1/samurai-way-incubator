@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom'
 import s from './Header.module.scss'
 import { HeaderProps } from './HeaderContainer'
 
-const Header: FC<HeaderProps> = ({ isAuth, setAuthDataAction, userData }) => {
+const Header: FC<HeaderProps> = ({ isAuth, logoutAction, userData }) => {
+	const logoutHandler = () => {
+		logoutAction()
+	}
 	return (
 		<header className={s.header}>
 			<div className={s.header__container}>
@@ -13,7 +16,13 @@ const Header: FC<HeaderProps> = ({ isAuth, setAuthDataAction, userData }) => {
 						alt='logo'
 					/>
 				</Link>
-				<div>{isAuth ? userData.login : <Link to={'/login'}>login</Link>}</div>
+				{isAuth ? (
+					<div>
+						{userData.login} <button onClick={logoutHandler}>X</button>
+					</div>
+				) : (
+					<Link to={'/login'}>login</Link>
+				)}
 			</div>
 		</header>
 	)

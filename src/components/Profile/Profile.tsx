@@ -1,13 +1,14 @@
 import { FC } from 'react'
-import { IProfile } from '../../types/IProfile.interface'
+import { IEntityProfile } from '../../types/IProfile.interface'
 import style from './Profile.module.scss'
 import UserInfo from './UserInfo/UserInfo'
 
 interface ProfileProps {
-	profilePage: IProfile
+	profilePage: IEntityProfile
+	updateStatus: (status: string) => Promise<void>
 }
 
-const Profile: FC<ProfileProps> = ({ profilePage }) => {
+const Profile: FC<ProfileProps> = ({ profilePage, updateStatus }) => {
 	return (
 		<div className={style.profile}>
 			<div className={style.profile__main}>
@@ -16,7 +17,7 @@ const Profile: FC<ProfileProps> = ({ profilePage }) => {
 					alt=''
 				/>
 			</div>
-			<UserInfo profileData={profilePage} />
+			<UserInfo profileData={profilePage} updateStatus={updateStatus} />
 			{/* <MyPostsContainer /> */}
 		</div>
 	)

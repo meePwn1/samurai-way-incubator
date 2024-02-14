@@ -4,8 +4,8 @@ import {
 } from '../store/actions/appAction'
 
 export enum AppActionTypes {
-	SET_STATUS = 'SET_STATUS',
-	SET_ERROR = 'SET_ERROR',
+	SET_STATUS = 'APP/SET_STATUS',
+	SET_ERROR = 'App/SET_ERROR',
 }
 
 export type AppAction =

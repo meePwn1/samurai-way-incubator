@@ -17,6 +17,14 @@ export const authReducer = (
 	switch (action.type) {
 		case AuthActionTypes.SET_AUTH_DATA:
 			return { ...state, data: action.data, isAuth: true }
+		case AuthActionTypes.LOGIN:
+			return {
+				...state,
+				isAuth: true,
+				data: { ...state.data, id: action.userID },
+			}
+		case AuthActionTypes.LOGOUT:
+			return { ...state, isAuth: false }
 		default:
 			return state
 	}

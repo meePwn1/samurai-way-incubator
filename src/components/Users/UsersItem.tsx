@@ -29,7 +29,10 @@ const UsersItem: FC<UsersItemProps> = ({
 			<div className={styles.avatar}>
 				<div className={styles.image}>
 					<Link to={`/profile/${user.id}`}>
-						<img src={avatar} alt={user.name} />
+						<img
+							src={user.photos.small ? user.photos.small : avatar}
+							alt={user.name}
+						/>
 					</Link>
 				</div>
 				{user.followed ? (

@@ -1,7 +1,11 @@
-import { setUserProfile } from '../store/actions/profileAction'
+import {
+	setStatusProfile,
+	setUserProfile,
+} from '../store/actions/profileAction'
 
 export enum ProfileActionTypes {
-	SET_PROFILE = 'SET_PROFILE',
+	SET_USERS = 'PROFILE/SET_PROFILE',
+	SET_STATUS = 'PROFILE/SET_STATUS',
 }
 
 export interface IProfile {
@@ -11,6 +15,9 @@ export interface IProfile {
 	fullName: string
 	contacts: IContacts
 	photos: IPhotos
+}
+export interface IEntityProfile extends IProfile {
+	status: string
 }
 
 interface IContacts {
@@ -28,4 +35,6 @@ interface IPhotos {
 	large: string
 }
 
-export type ProfileAction = ReturnType<typeof setUserProfile>
+export type ProfileAction =
+	| ReturnType<typeof setUserProfile>
+	| ReturnType<typeof setStatusProfile>

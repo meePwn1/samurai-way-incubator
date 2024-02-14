@@ -4,7 +4,6 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { withAuthRedirect } from '../../HOC/withAuthRedirect'
 import LinearLoader from '../../UI/Loader/LinearLoader'
-import { ProfileService } from '../../services/ProfileService'
 import * as ProfileActions from '../../store/actions/profileAction'
 import { RootState } from '../../store/store'
 import Profile from './Profile'
@@ -23,12 +22,12 @@ class ProfileContainer extends React.Component<ProfileProps, StateProps> {
 	componentDidMount() {
 		let userID = this.props.match.params.userID
 		if (!userID) {
-			userID = '2'
+			userID = `${this.props.userID}`
 		}
-		ProfileService.getProfile(userID).then(res => {
-			this.props.setUserProfile(res.data)
-			this.setState({ isLoading: false })
-		})
+		Promise.allSettled([
+			this.props.fetchUsersProfile(userID),
+			this.props.getStatusUserByID(userID),
+		]).finally(() => this.setState({ isLoading: false }))
 	}
 	render() {
 		return (
@@ -36,7 +35,10 @@ class ProfileContainer extends React.Component<ProfileProps, StateProps> {
 				{this.state.isLoading ? (
 					<LinearLoader />
 				) : (
-					<Profile profilePage={this.props.profilePage} />
+					<Profile
+						profilePage={this.props.profilePage}
+						updateStatus={this.props.updateStatusProfile}
+					/>
 				)}
 			</>
 		)
@@ -45,6 +47,7 @@ class ProfileContainer extends React.Component<ProfileProps, StateProps> {
 
 const mapStateToProps = (state: RootState) => ({
 	profilePage: state.profilePage,
+	userID: state.auth.data.id,
 })
 
 const connected = connect(mapStateToProps, { ...ProfileActions })

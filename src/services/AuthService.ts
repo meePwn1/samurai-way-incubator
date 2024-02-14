@@ -5,13 +5,27 @@ const AUTH = 'auth'
 
 export class AuthService {
 	static me() {
-		return apiAxios.get<IResponse>(`${AUTH}/me`)
+		return apiAxios.get<IResponse<IAuth>>(`${AUTH}/me`)
 	}
-	static login() {}
+	static login(payload: IAuthPayload) {
+		return apiAxios.post<IResponse<{ userID: number }>>(
+			`${AUTH}/login`,
+			payload
+		)
+	}
+	static logout() {
+		return apiAxios.delete<IResponse>(`${AUTH}/login`)
+	}
 }
 
-interface IResponse {
+interface IResponse<T = {}> {
 	resultCode: number
 	messages: string[]
-	data: IAuth
+	data: T
+}
+export interface IAuthPayload {
+	email: string
+	password: string
+	rememberMe?: boolean
+	captcha?: boolean
 }
